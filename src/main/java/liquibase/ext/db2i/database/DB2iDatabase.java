@@ -1,10 +1,18 @@
 package liquibase.ext.db2i.database;
 
-import liquibase.database.DatabaseConnection;
-import liquibase.database.core.DB2Database;
-import liquibase.exception.DatabaseException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-public class DB2iDatabase extends DB2Database {
+import liquibase.database.DatabaseConnection;
+import liquibase.database.core.AbstractDb2Database;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.DatabaseException;
+import liquibase.statement.SqlStatement;
+import liquibase.statement.core.RawCallStatement;
+import liquibase.util.JdbcUtils;
+import liquibase.util.StringUtils;
+
+public class DB2iDatabase extends AbstractDb2Database {
 
     @Override
     public int getPriority() {
@@ -38,4 +46,21 @@ public class DB2iDatabase extends DB2Database {
     public boolean supportsSchemas() {
         return true;
     }
+
+    @Override
+    public String getDefaultCatalogName() {
+//        try {
+//            if(this.defaultCatalogName != null){
+//                return this.defaultCatalogName;
+//            }
+//            String catalog = this.getConnection().getCatalog();
+//            if(catalog != null) {
+//                this.defaultCatalogName = catalog;
+//                return defaultCatalogName;
+//            }
+//        } catch (DatabaseException e) {
+//        }
+        return super.getDefaultCatalogName();
+    }
+
 }
